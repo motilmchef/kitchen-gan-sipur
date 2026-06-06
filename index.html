@@ -320,8 +320,7 @@ function RecipesSection({lang,scale,isEditor,serverData,onDataChange,mIdx,setMId
   const videos=(serverData&&serverData.videos)||{};
 
   function detectTimer(txt){
-    const patterns=[{re:/(\d+(?:\.\d+)?)\s*(?:דקות?|דק(?:\.|$|\s)|min(?:utes?)?)/i,mult:60},{re:/(\d+(?:\.\d+)?)\s*(?:שעות?|hours?)/i,mult:3600},{re:/שעה\s+וחצי/,fixed:5400},{re:/חצי\s+שעה/,fixed:1800},{re:/(\d+(?:\.\d+)?)\s*(?:שניות?|sec(?:onds?)?)/i,mult:1
-]}}];
+    const patterns=[{re:/(\d+(?:\.\d+)?)\s*(?:דקות?|דק(?:\.|$|\s)|min(?:utes?)?)/i,mult:60},{re:/(\d+(?:\.\d+)?)\s*(?:שעות?|hours?)/i,mult:3600},{re:/שעה\s+וחצי/,fixed:5400},{re:/חצי\s+שעה/,fixed:1800},{re:/(\d+(?:\.\d+)?)\s*(?:שניות?|sec(?:onds?)?)/i,mult:1}];
     for(const p of patterns){if(p.fixed){if(txt.match(p.re))return p.fixed;}else{const m=txt.match(p.re);if(m)return Math.round(parseFloat(m[1])*p.mult);}}
     return null;
   }
