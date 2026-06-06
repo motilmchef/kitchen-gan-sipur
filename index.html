@@ -379,7 +379,7 @@ function RecipesSection({lang,scale,isEditor,serverData,onDataChange,mIdx,setMId
     </div>
   );
 
-  const videoUrl=videos[recipe.name]||"";
+  const videoUrl=videos[recipe.name]||recipe.video||"";
   const embedUrl=getEmbedUrl(videoUrl);
 
   return(
