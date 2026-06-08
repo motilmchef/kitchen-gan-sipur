@@ -814,7 +814,22 @@ if(ReactDOM.createRoot){ReactDOM.createRoot(root).render(React.createElement(App
 else{ReactDOM.render(React.createElement(App),root);}
 </script>
 <script>
-if("serviceWorker"in navigator){window.addEventListener("load",()=>{navigator.serviceWorker.register("/sw.js").catch(()=>{});});}
+if("serviceWorker"in navigator){
+  window.addEventListener("load",()=>{
+    navigator.serviceWorker.register("/sw.js").then(reg=>{
+      reg.update();
+      reg.addEventListener('updatefound',()=>{
+        const nw=reg.installing;
+        nw.addEventListener('statechange',()=>{
+          if(nw.state==='installed'&&navigator.serviceWorker.controller){
+            nw.postMessage('skipWaiting');
+          }
+        });
+      });
+    }).catch(()=>{});
+    navigator.serviceWorker.addEventListener('controllerchange',()=>window.location.reload());
+  });
+}
 </script>
 </body>
 </html>
