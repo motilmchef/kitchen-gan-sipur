@@ -1,4 +1,4 @@
-const CACHE = 'gan-sipur-v' + '2025061001';
+const CACHE = 'gan-sipur-v' + '2026060801';
 const ASSETS = ['/', '/index.html', '/manifest.json'];
 self.addEventListener('install', e => {
   e.waitUntil(caches.open(CACHE).then(c => c.addAll(ASSETS)).catch(() => {}));
