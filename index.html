@@ -764,7 +764,7 @@ function DishesSection({lang,isEditor,serverData,onDataChange}){
 function App(){
   const [authed,setAuthed]=React.useState(false);
   const [welcomed,setWelcomed]=React.useState(false);
-  const [showPopup,setShowPopup]=React.useState(true);
+  const [showPopup,setShowPopup]=React.useState(()=>!localStorage.getItem('popup_v1'));
   const [userHash,setUserHash]=React.useState("");
   const [section,setSection]=React.useState("recipes");
   const [lang,setLang]=React.useState("he");
@@ -840,7 +840,7 @@ function App(){
         </div>
       )}
 
-      {showPopup&&<UpdatePopup onClose={()=>setShowPopup(false)}/>}
+      {showPopup&&<UpdatePopup onClose={()=>{localStorage.setItem('popup_v1','1');setShowPopup(false);}}/>}
       {section==="recipes"&&<RecipesSection lang={lang} scale={scale} isEditor={isEditor} serverData={serverData} onDataChange={setServerData} mIdx={mIdx} setMIdx={setMIdx} tab={tab} setTab={setTab} onAddTimer={addTimer}/>}
       {section==="dishes"&&<DishesSection lang={lang} isEditor={isEditor} serverData={serverData} onDataChange={setServerData}/>}
 
