@@ -1,5 +1,6 @@
 
 
+
 <!DOCTYPE html>
 <html lang="he" dir="rtl">
 <head>
@@ -306,8 +307,8 @@ function logLogin(userHash){
     }).catch(function(){});
   }catch(e){}
 }</script>
-<script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
-<script type="text/babel" data-presets="react">
+<script src="https://unpkg.com/@babel/standalone@7.22.5/babel.min.js"></script>
+<script type="text/babel">
 function UpdatePopup({onClose}){
   return(
     <div style={{position:"fixed",top:0,left:0,right:0,bottom:0,background:"rgba(0,0,0,0.6)",zIndex:9999,display:"flex",alignItems:"center",justifyContent:"center",padding:20}} dir="rtl">
