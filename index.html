@@ -765,7 +765,8 @@ function DishesSection({lang,isEditor,serverData,onDataChange}){
 function App(){
   const [authed,setAuthed]=React.useState(false);
   const [welcomed,setWelcomed]=React.useState(false);
-  const [showPopup,setShowPopup]=React.useState(()=>!localStorage.getItem('popup_v1'));
+  const [showPopup,setShowPopup]=React.useState(true);
+  React.useEffect(()=>{if(localStorage.getItem('popup_v1'))setShowPopup(false);},[]);
   const [userHash,setUserHash]=React.useState("");
   const [section,setSection]=React.useState("recipes");
   const [lang,setLang]=React.useState("he");
