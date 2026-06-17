@@ -159,7 +159,7 @@ const MENU_CATEGORIES=[
  sections:[
   {label:"תנור",color:"teal",layers:[
    {main:"קרואסון פרעצל",sub:"למרוח חמאה לפני התנור"},
-   {main:"חלומי קריספי",sub:"בזילוף חמאה ודבש",weight:"120 גר׳"}]},
+   {main:"חלומי קריספי",sub:"בזילוף חמאה ודבש",weight:"מנה שלמה"}]},
   {label:"מחבתות",color:"purple",layers:[{main:"2 ביצי עין הפוכות",sub:""}]},
   {label:"צ׳קר",color:"amber",chips:["ארוגולה ויניגרט הדרים","מלח פלפל"]}]},
 
@@ -291,7 +291,21 @@ const MENU_CATEGORIES=[
    {main:"זילוף דבש",sub:""},
    {main:"להכניס לתנור",sub:"אחרי היציאה — לפרוס ל-10"}]},
   {label:"צקר",color:"amber",chips:["זילוף דבש","פרמזן"]}]}
-]}];</script>
+]}];
+
+function logLogin(userHash){
+  try{
+    var u=USERS[userHash]||{};
+    var now=new Date();
+    var date=now.toLocaleDateString("he-IL");
+    var time=now.toLocaleTimeString("he-IL",{hour:"2-digit",minute:"2-digit"});
+    fetch("https://script.google.com/macros/s/AKfycbxOfZfMktscoe5hGImWkLsGjZ-cBZMfkbZ_TCuiPVMcirRQu84G6UYCimhbdS_5_bRG/exec",{
+      method:"POST",
+      headers:{"Content-Type":"application/json"},
+      body:JSON.stringify({name:u.name||"לא ידוע",branch:u.branch||"לא ידוע",date:date,time:time})
+    }).catch(function(){});
+  }catch(e){}
+}</script>
 <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
 <script type="text/babel" data-presets="react">
 function UpdatePopup({onClose}){
@@ -370,19 +384,6 @@ function PhoneGate({onAuth}){
   );
 }
 
-function logLogin(userHash){
-  try{
-    var u=USERS[userHash]||{};
-    var now=new Date();
-    var date=now.toLocaleDateString("he-IL");
-    var time=now.toLocaleTimeString("he-IL",{hour:"2-digit",minute:"2-digit"});
-    fetch("https://script.google.com/macros/s/AKfycbxOfZfMktscoe5hGImWkLsGjZ-cBZMfkbZ_TCuiPVMcirRQu84G6UYCimhbdS_5_bRG/exec",{
-      method:"POST",
-      headers:{"Content-Type":"application/json"},
-      body:JSON.stringify({name:u.name||"לא ידוע",branch:u.branch||"לא ידוע",date:date,time:time})
-    }).catch(function(){});
-  }catch(e){}
-}
 
 function RecipesSection({lang,scale,isEditor,serverData,onDataChange,mIdx,setMIdx,tab,setTab,onAddTimer}){
   const L=LANGS[lang];
